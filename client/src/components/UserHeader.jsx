@@ -111,7 +111,7 @@ const UserHeader = ({ user }) => {
         <Flex gap={2}>
           {user.linkedIn && (
             <Box className="icon-container">
-              <a href={"http://" + user.linkedIn}>
+              <a href={user.linkedIn}>
                 <BsLinkedin size={24} cursor={"pointer"} />
               </a>
             </Box>
