@@ -3,15 +3,18 @@ import { Box, Flex, Spinner } from "@chakra-ui/react";
 import useShowToast from "../hooks/useShowToast";
 import axios from "axios";
 import Post from "../components/Post";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import postAtom from "../atoms/postAtom";
 import SuggestedUsers from "../components/SuggestedUsers";
 import userAtom from "../atoms/userAtom";
+import { useNavigate } from "react-router-dom";
 const HomePage = () => {
   const showToast = useShowToast();
   const [posts, setPosts] = useRecoilState(postAtom);
   const [loading, setLoading] = useState(true);
   const user = useRecoilValue(userAtom);
+  const setUser = useSetRecoilState(userAtom);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getfeedPosts = async () => {
@@ -21,23 +24,10 @@ const HomePage = () => {
         const res = await axios.get("/api/posts/feed");
         setPosts(res.data);
       } catch (error) {
-        console.log(error);
-        // If the error is from the server (e.g., network error, 500 Internal Server Error)
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.error
-        ) {
-          const errorMessage = error.response.data.error;
-          showToast("Error", errorMessage, "error");
-        } else {
-          // If the error object does not contain the expected structure
-          showToast(
-            "Error",
-            "An error occurred. Please try again later.",
-            "error"
-          );
-        }
+        setUser(null);
+        localStorage.removeItem("user-campusaura");
+        setPosts([]);
+        navigate("/auth");
       } finally {
         setLoading(false);
       }
@@ -70,7 +60,7 @@ const HomePage = () => {
           md: "block",
         }}
       >
-        <SuggestedUsers />
+        <SuggestedUsers navigate={navigate} setUser={setUser} />
       </Box>
     </Flex>
   );

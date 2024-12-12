@@ -4,7 +4,7 @@ import SuggestedUser from "./SuggestedUser";
 import useShowToast from "../hooks/useShowToast";
 import axios from "axios";
 
-const SuggestedUsers = () => {
+const SuggestedUsers = ({ navigate, setUser }) => {
   const [loading, setLoading] = useState(true);
   const [suggestedUsers, setSuggestedUsers] = useState([
     {
@@ -22,23 +22,7 @@ const SuggestedUsers = () => {
         const res = await axios.get("/api/users/suggested");
         setSuggestedUsers(res.data);
       } catch (error) {
-        console.log(error);
-        // If the error is from the server (e.g., network error, 500 Internal Server Error)
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.error
-        ) {
-          const errorMessage = error.response.data.error;
-          showToast("Error", errorMessage, "error");
-        } else {
-          // If the error object does not contain the expected structure
-          showToast(
-            "Error",
-            "An error occurred. Please try again later.",
-            "error"
-          );
-        }
+        showToast("Logout", "Session expired login again", "error");
       } finally {
         setLoading(false);
       }
