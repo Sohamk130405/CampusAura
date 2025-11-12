@@ -73,7 +73,7 @@ const Header = () => {
             fontSize={"lg"}
             textAlign={"center"}
           >
-            CampusAura
+            CampusShare
           </Text>
         </Flex>
       </Link>

@@ -65,7 +65,7 @@ const UserHeader = ({ user }) => {
               p={1}
               borderRadius={"full"}
             >
-              CampusAura
+              CampusShare
             </Text>
           </Flex>
         </Box>
@@ -106,7 +106,7 @@ const UserHeader = ({ user }) => {
             {user.followers.length + (following ? 1 : 0)} followers
           </Text>
           <Box w={1} h={1} bg={"gray.dark"} borderRadius={"full"}></Box>
-          <Link>CampusAura.com</Link>
+          <Link>CampusShare.com</Link>
         </Flex>
         <Flex gap={2}>
           {user.linkedIn && (

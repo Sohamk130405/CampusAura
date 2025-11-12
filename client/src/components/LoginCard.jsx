@@ -39,7 +39,7 @@ export default function LoginCard() {
         password: inputs.password,
       });
 
-      localStorage.setItem("user-campusaura", JSON.stringify(res.data));
+      localStorage.setItem("user-CampusShare", JSON.stringify(res.data));
       setUser(res.data);
       showToast("Login", "You are logged in successfully!", "success");
     } catch (error) {

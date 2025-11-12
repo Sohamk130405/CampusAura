@@ -58,7 +58,7 @@ export default function SignupCard() {
         div: inputs.div,
       });
 
-      localStorage.setItem("user-campusaura", JSON.stringify(res.data));
+      localStorage.setItem("user-CampusShare", JSON.stringify(res.data));
       setUser(res.data);
       showToast("SignUp", "Account created Successfully!", "success");
     } catch (error) {
